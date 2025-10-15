@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale (LC_ALL, "RU");
+    int matrix[100][100], N = 0;
+
+    cout << "Введите количество строк: ";
+    cin >> N;
+
+    int top = 0, bottom = N - 1;
+    int left = 0, right = N - 1;
+    int current = 1; 
+
+    while (current <= N * N) {
+
+        for (int j = left; j <= right && current <= N * N; j++) {
+            matrix[top][j] = current++;
+        }
+        top++;
+
+        for (int i = top; i <= bottom && current <= N * N; i++) {
+            matrix[i][right] = current++;
+        }
+        right--;
+
+        for (int j = right; j >= left && current <= N * N; j--) {
+            matrix[bottom][j] = current++;
+        }
+        bottom--;
+
+        for (int i = bottom; i >= top && current <= N * N; i--) {
+            matrix[i][left] = current++;
+        }
+        left++;
+    }
+
+    cout << "Ваш результат: " << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
+
+    return 0;
+}
